@@ -1,0 +1,28 @@
+{
+    "id": "CA199335",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1635961036432.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "id": "8f80755b73f04ce99e6793ba3f9f2816",
+        "name": "tmp_kmeans",
+        "title": "tmp_kmeans",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 4387877392,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1635961036432,
+    "read_only": false,
+    "read_only_alternatives": []
+}
