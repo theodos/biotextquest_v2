@@ -21,6 +21,17 @@ function(input, output, session) {
   #   fetch_all_pubmed_ids(query_result)
   # })
   # 
+  
+    
+output$algo_params <- renderUI({
+  
+  switch(input$clustering_algo,
+         "kmeans" = numericInput("kmeans_noclusters", "Number of clusters:", 2),
+         "mcl" = numericInput("mcl_inflation", "Inflation:", 2.2)
+         )
+ 
+})
+  
  observeEvent(input$run_analysis, {
    
    show_modal_progress_line(

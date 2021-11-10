@@ -92,9 +92,10 @@ ui <-
                            title = "Select the metric to use for calculating the distance/similarity between the retrieved documents",
                            placement = "right", options = list(container = "body")),
                  selectInput("clustering_algo", "Clustering algorithm:",
-                             c("Kmeans" = "kmeans",
+                             c("K-means" = "kmeans",
                                "MCL" = "mcl")
                              ),
+                 uiOutput("algo_params"),
                  numericInput("threshold", "Threshold:", 0.05,
                               min = 0, max = 1, step = 0.01)
                )

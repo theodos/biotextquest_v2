@@ -12,6 +12,7 @@ library(MCL)
 library(shinybusy)
 library(ggfortify)
 library(mongolite)
+library(shinyjs)
 
 # Default stopwords to be used. The user can also input his/her own.
 stopwords = c("i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours")
