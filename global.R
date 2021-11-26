@@ -13,6 +13,20 @@ library(shinybusy)
 library(ggfortify)
 library(mongolite)
 library(shinyjs)
+library(textmineR)
+library(SnowballC)
+library(udpipe)
+library(tidyr)
+library(broom)
+library(httr)
+library(igraph)
+library(dplyr)
+library(stringr)
+library(quanteda.textstats)
+library(quanteda.textplots)
+library(shinyjs)
+#library(GScluster) 
+
 
 # Default stopwords to be used. The user can also input his/her own.
 stopwords = c("i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours")
@@ -20,7 +34,28 @@ stopwords = c("i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you"
 # Prepossessing function for the words of a document used by text2vec package functions
 prep_fun = tolower
 # Tokenization function for the words of a document used by text2vec package functions
-tok_fun = word_tokenizer
+tok_fun = function(x) {
+  quanteda::tokens(x, remove_punct = T, remove_symbols = F, remove_numbers = F, remove_url = T, remove_separators = F, split_hyphens = F)
+  }
+  
+
+entity_choices_global = c("All" = "",
+            "PubChem Compound identifiers" = "pubchem",
+            "NCBI Taxonomy entries" = "ncbi",
+            "Gene Ontology biological process terms" = "go_biological", 
+            "Gene Ontology cellular component terms" = "go_cellular",
+            "Gene Ontology molecular function terms" = "go_molecular",
+            "BRENDA Tissue Ontology terms" = "brenda",
+            "Disease Ontology terms" = "disease",
+            "Environment Ontology terms" = "enviroment")
+
+
+#   #function(x) {
+#   #postag_lemma_tokenizer(x, udpipe_model=udpipe_load_model('/Users/theodos/Dropbox/TETRAKTYS_projects/Custom software/biotextquest/english-ewt-ud-2.5-191206.udpipe'),
+#                                  tagger = "default",
+#                                  tokenizer = "tokenizer", pos_keep = character(0),
+#                                  pos_remove = character(0))
+# }
 
 
 themeelector <- function() {
