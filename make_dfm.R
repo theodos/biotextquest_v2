@@ -29,6 +29,8 @@ make_dfm <- function(df_of_articles, title = TRUE, rmstopwords = TRUE,
     articles_dfm <- dfm_wordstem(articles_dfm)
   }
   
+  articles_dfm <- dfm_trim(articles_dfm, min_docfreq = ndoc(articles_dfm)/100, max_docfreq = (ndoc(articles_dfm)*98)/100)
+  
   results <- list()
   results$articles_corpus <- articles_corpus
   results$corpus_tokens <- corpus_tokens

@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0044)http://147.52.203.130/biotextquest/help.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>textQuest</title>
+
+    <link rel="stylesheet" type="text/css" href="Help_page/help_css/aiStyles2.css" >
+</head>
+<body>
+<div id="helpContainer">
+<a name="top"></a>
+
+
+
+<div id="videoDemo">
+    <h2>Quick demonstration of BioTextQuest</h2>
+    <iframe src="https://www.youtube.com/embed/JKnDpDRU3Ag" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br><br>
+    <caption>Query: (anterior-posterior AND drosophila) OR (dorsal-ventral AND drosophila) 1:2001/03[dp]</caption>
+</div>
+
+<div id="index"> 
+    <h3>Index</h3>
+    
+    </a><h4><a></a><a href="#query">1. Start/Query tab</a></h4>
+    <h4><a href="#results">2. Results tab</a></h4>
+    <h4 style="padding-left: 30px;"><a href="#clusteredDocs">Clustered documents</a></h4>
+    <h4 style="padding-left: 30px;"><a href="#Wordclouds">Wordclouds</a></h4>
+    <h4 style="padding-left: 30px;"><a href="#Biomedical">Biomedical Terms</a></h4>
+    
+    
+    <br><br>
+    </div>  
+
+<div name="overallContainer" class="overallContainer">
+<!--<h2>Contents</h2>-->
+
+<!--             -->
+<!-- HOME PAGE   -->
+<!--             -->
+<div class="coverDiv" style="margin-top: 40px;">
+<div id="homeDiv" class="contentDiv" style="width:30%;">
+    <h4><a name="query"></a><u>1. Home/Query page</u> [<a href="#top">Go to top</a>]</h4>
+
+    <div class="text">
+    The home page of bioTextQuest is the page where the user can input his query:
+    <br><br>
+    
+    <br><br>
+    <b><i>Query</i></b>: The keywords with which the search will be performed over PubMed database. The query should be in the format that is normally accepted by the database and will be processed exactly as it would be processed if the search was performed from the original web site. Any notation that would be acceptable in the original database interface is acceptable here, e.g.  p53 AND (leaver OR pancr*) NOT cancer  (Medline). The query must return more than 120 articles in PubMed for proper results. In other cases an error is possible.
+    <br>
+    It should be noted that the abstracts are kept in a local database that is updated every week with new records from PubMed. Thus, some searches may not yield the same number of articles when performed in the bioTextQuest server and the PubMed web site.
+    </div>
+
+</div>
+<img src="Help_page/help_files/homepage.jpg" width="69%">
+</div>
+
+
+<!--<b><i>Target Database</i></b>: Currently, only <a href="http://www.ncbi.nlm.nih.gov/pubmed">PubMed</a> is supported. Other resources are expected to be incorporated in future versions of the system.
+<p>-->
+<div class="coverDiv">
+<div id="advancedDiv" class="contentDiv">
+    <b><i>Advanced Parameters</i></b>: Control of stemming and clustering algorithms and their parameters. Upon Clicking on the <i>Advanced</i> button, the user can change the default options:
+    <br><br>
+    <br><br>
+    <a name="chooseEntities"></a><b><i>Choose extract entities</i></b>: Select which extract entities will be present in the analysis.For example, the user can choose to only inlude genes/proteins from the papers that PubMed returns. If left blank, all entities are included. 
+    <br>
+    <a name="similarity"></a><b><i>Similarity matrix</i></b>:Clustering can be performed according to various similarity methods such as: <a href="https://search.r-project.org/CRAN/refmans/lsa/html/cosine.html">Cosine</a>, <a href="https://search.r-project.org/CRAN/refmans/mlr3measures/html/jaccard.html">Jaccard</a>, <a href="https://www.rdocumentation.org/packages/TSdist/versions/3.7.1/topics/EuclideanDistance">Euclidean similarity</a>.
+    <br>
+    <a name="clustering"></a><b><i>Clustering Algorithm</i></b>: (<i>Default: Louvain community detection</i>). Clustering can be performed by various algorithms. Currently the following clustering algorithms are supported: Louvain community detection, Top2Vec, K-means, Markov Clustering (MCL).<br>
+    Each Clustering algorithm has parameters whose optimum values (according to the of the author of the implementation) are chosen as default. The user can change them according to his needs using the provided inputs.
+            </p><ul>
+                </li><li><i>Louvain community detection</i>, parameter: Resolution  (default: 1)
+                    <br>
+                    Resolution is a parameter that affects the size of the recovered clusters. Smaller resolutions recover smaller clusters and therefore a larger number of them, while, conversely, larger values recover clusters containing more data points. More information <a href="https://www.rdocumentation.org/packages/NetworkToolbox/versions/1.4.2/topics/louvain"> here </a>
+                
+                <li><i>Markov Clustering (MCL)</i>, parameter: Inflation (default: 1.8)
+                    <br>
+                    The rule of thumb is that the larger the inflation parameter the more clusters will be created and the more fine-grained they will be. More information <a href="https://rdrr.io/cran/MCL/man/mcl.html">here</a>
+                </li><li><i>K-Means</i>, parameter: number of clusters  (default: 3)
+                    <br>
+                    The user specifies the desired number of resulting clusters. More information <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/kmeans">here</a>
+                    
+            </li>
+            <li><i>Top2Vec</i>
+                    <br>
+                    Implementation of the python algorithm. Needs a minimum number, usually more than 100, of articles to produce results. More information <a href="https://search.r-project.org/CRAN/refmans/doc2vec/html/top2vec.html">here</a>
+                    
+            </li></ul>
+
+
+
+<a name="entries"></a><b><i>Total papers</i></b>: The maximum  number of papers that should be analyzed. If there are more papers than the limit imposed by the user, the more recent ones are retrieved.
+</div>
+<img src="Help_page/help_files/advanced.jpg" style="width:50%; padding-bottom: 5%; padding-left: 2%;">
+</div>
+
+<!--                 -->
+<!-- RESULTS PAGE    -->
+<!--                 -->
+<!--<div id="resultsDiv">-->
+<div class="coverDiv">
+
+   <div id="clusteredDocs" class="contentDiv" style="width:40%;">
+    <h4><a name="results"></a><u>2. Results tab</u> [<a href="#top">Go to top</a>]</h4>
+        The Results tab contains 3 tabs: Clustered Documents, Wordclouds, Biomedical terms
+
+
+        <br><br>
+
+
+            <a name="clusteredDocs"></a><b><i>Clustered documents</i></b>
+                <br>
+                This tab displays all the PubMed articles that have been analysed. It includes the cluster that the article has been assigned, the PubMed id with a link to PubMed and the abstract
+                <br>
+                The Summary shows the total number of analysed papers and the number of generated clusters<br><br>
+                A specific seed is used, as recommended in the documentation, in order to obtain reproducible results.
+    </div>
+    <img src="Help_page/help_files/clusteredDocs.jpg" style="width:59%;">
+</div>
+
+    <br><br>
+<div class="coverDiv" style="margin-top:200px;">
+    <div class="contentDiv" style="width:30%;">
+        <a name="Wordclouds"></a><b><i>Wordclouds</i></b>
+
+            The created wordclouds. Each cluster is represented by keywords, which are displayed as a tag cloud. The size of each term is proportional to its frequency. 
+            The colour of the term corresponds to one of the following <a href="https://extract.jensenlab.org/"><i>Extract entities</i> </a>:
+            <ul>
+                <li>Genes/Proteins of a specific organism</li>
+                <li>PubChem Compound identifiers</li>
+                <li>NCBI Taxonomy entries</li>
+                <li>Gene Ontology biological process terms</li>
+                <li>Gene Ontology cellular component terms</li>
+                <li>Gene Ontology molecular function terms</li>
+                <li>BRENDA Tissue Ontology terms</li>
+                <li>Disease Ontology terms</li>
+                <li>Environment Ontology terms</li>
+            </ul>
+    </div>
+        <img src="Help_page/help_files/wordclouds.jpg" style="width:69%;">
+</div>
+
+<div class="coverDiv">
+        <div class="contentDiv">
+        <b><i>Wordcloud Features</i></b>
+        <br>
+        All the wordclouds have the following features:
+        <ul>
+            <li>Interactive words: When the user clicks the word, a new tab opens where more information regarding this word can be found. Each entity type links to a different database (PubChem, NCBI etc.)</li>
+            <li>Additional options: Using this menu, the user may choose to perform the following actions in all clusters:
+                <br>
+
+                <br><br>
+                <ol>
+                    <li><i>Total words in cloud</i>
+                        <br>
+                        Change the total number of words in each wordcloud
+                    </li>
+                    <li><i>Download wordclouds</i>
+                        <br>
+                        Download a PDF copy of the wordclouds</li>
+                    <li><i>Colour only specific entities</i>
+                        <br>
+                        The user can select which entities will be coloured in the wordclouds by checking the relevant checkbox. The rest will be grey.</li>
+                    <li><i>Highlight words</i>
+                        <br>
+                        By moving the mouse over an entity in the menu, all the relevant words are highlighted.</li>
+                    </ol>
+            </li>
+        </ul>
+    </div>
+    <img src="Help_page/help_files/entities.jpg" style="width:35%; padding-left:50px;">
+</div>
+        
+    <div class="coverDiv" style="margin-bottom:200px;">
+        <div class="contentDiv" style="width:30%;">
+            <a name="Biomedical"></a><b><i>Biomedical terms</i></b>
+                <br>
+                This tab shows the frequency of each word in its cluster. The words can be sorted in ascending or descending order. 
+                <br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+        <img src="Help_page/help_files/biomed.jpg" width="69%">
+    </div>
+
+
+
+
+</div> <!-- end of overallContainer DIV -->
+<div name="footer" id="footer" class="footer discrete">
+    Bioinformatics Lab, UoC, 2022 | <a href="mailto:iliop.john@gmail.com;theodosios.theodosiou@gmail.com;med4265@edu.med.uoc.gr">Contact Us</a>
+</div>
+</div>
+</body></html>
