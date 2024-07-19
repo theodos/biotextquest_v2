@@ -1,0 +1,74 @@
+FROM openanalytics/r-base
+MAINTAINER Sonia Garcia-Ruiz "s.ruiz@ucl.ac.uk"
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libxt-dev \
+        libcairo2-dev \
+        libxml2-dev \
+        libssl-dev \ 
+        libcurl4-openssl-dev \
+        #libv8-3.14-dev \ couldn't install this package. Instead installed the following. Solution from https://github.com/jeroen/V8/issues/49
+        libnode-dev \
+        #libsqlite3-dev \
+        #libmariadb-client-lgpl-dev \
+        python3.6 \ 
+        python3-pip \
+        python3-setuptools \
+        python3-dev \
+        && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        cmake \
+        libudunits2-dev \
+        libmariadbclient-dev \
+        #libmariadb-client-lgpl-dev \
+        libgeos-dev \
+        libgmp-dev \
+        libnlopt-dev
+        
+RUN  mkdir /root/biotextquest_top2vec
+    
+COPY Rprofile.site /usr/lib/R/etc/
+
+RUN pip install top2vec
+
+#the following from https://www.r-bloggers.com/2021/05/dockerizing-shiny-applications/
+RUN echo "local(options(shiny.port = 3838, shiny.host = '0.0.0.0'))" > /usr/lib/R/etc/Rprofile.site 
+RUN  R -e 'install.packages("shinythemes", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("shinyWidgets", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("shinyBS", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("easyPubMed", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("text2vec", repos="http://cran.rstudio.com/", dependencies=T)'
+RUN  R -e 'install.packages("tokenizers", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("MCL", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("shinybusy", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("ggfortify", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("mongolite", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("shinyjs", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("SnowballC", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("udpipe", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("tidyr", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("emmeans", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("broom", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("httr", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("igraph", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("dplyr", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("stringr", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("quanteda.textstats", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("quanteda.textplots", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("quanteda", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("RMySQL", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("shinyjs", repos="http://cran.rstudio.com/", dependencies=T)'
+RUN  R -e 'install.packages("anytime", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("shinyWidgets", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN apt-get install -y --no-install-recommends libsasl2-dev
+RUN  R -e 'install.packages("mongolite", repos="http://cran.rstudio.com/", dependencies=T)' 
+RUN  R -e 'install.packages("reticulate", repos="http://cran.rstudio.com/", dependencies=T)'
+RUN R -e 'install.packages("rentrez", repos = "http://cran.rstudio.com/", dependencies=T)'
+
+
+COPY ./biotextquest_for_pub/biotextquest_v4 /root/biotextquest_top2vec
+
+EXPOSE 3838
+
+CMD ["R", "-e", "shiny::runApp('/root/biotextquest_top2vec')"]
+
